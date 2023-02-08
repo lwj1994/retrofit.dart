@@ -421,8 +421,10 @@ class RetrofitGenerator extends GeneratorForAnnotation<retrofit.RestApi> {
         const Code('$_localHeadersVar.removeWhere((k, v) => v == null);'),
       );
     }
-
-    _generateRequestBody(blocks, _localDataVar, m);
+    
+    if (_getMethodAnnotationByType(m, retrofit.GET) == null) {
+      _generateRequestBody(blocks, _localDataVar, m);
+    }
 
     final extraOptions = {
       'method': literal(httpMethod.peek('method')?.stringValue),
